@@ -11,4 +11,4 @@ If you run START.bat as administrator the registry key will be imported automati
 
 It's advisable to restart your PC after you are done.
   
-You could add the START.bat to a recurring (every ~25 days) scheduled task in Windows for maximum carelessness?
+You could add the START.bat to a recurring (every ~25 days) scheduled task in Windows, with some conditions, for maximum carelessness(?)
