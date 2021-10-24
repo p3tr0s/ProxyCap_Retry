@@ -2,9 +2,11 @@
 
 Inspired by <a href="https://github.com/lianshufeng/proxycap_crack">lianshufeng/proxycap_crack</a>
 
-A very badly written batch script to reset the 30 day trial of Proxycap. It utilizes the Windows 10 Sandbox to extract a fresh 30 day trial key.<br>
+A very badly written batch script to reset the 30 day trial of Proxycap. <br>
 
-Requirements:<br>
+It utilizes the Windows 10 Sandbox to extract a fresh 30 day trial key.
+
+Requirements:
 <li>Have Windows 10 (x64) and the Sandbox enabled
 <li>The root folder of the script needs to be placed in C:\ otherwise you need to modify the var %RootDir% in START.bat
 <li>The START.bat script will try to download pcap536_x64.msi from the <a href="https://www.proxycap.com/">official site</a> in the ./files/ dir if it's not already there
