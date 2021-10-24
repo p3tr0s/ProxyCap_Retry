@@ -1,4 +1,7 @@
 # Retry Proxycap
+
+Inspired by lianshufeng/proxycap_crack
+
 A very badly written batch script to reset the 30 day trial of Proxycap. It utilizes the Windows 10 Sandbox to extract a fresh 30 day trial key<br>
 
 Requirements:<br>
