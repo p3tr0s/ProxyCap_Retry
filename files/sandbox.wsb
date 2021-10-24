@@ -1,1 +1,12 @@
-
+<Configuration>
+  <Networking>Disabled</Networking>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>C:\proxycap\files</HostFolder>
+      <ReadOnly>false</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+  <LogonCommand>
+    <Command>powershell -command "while (!(Test-PathC:\Users\WDAGUtilityAccount\Desktop\files\core.bat)) { Start-Sleep 1 } Start-Process C:\Users\WDAGUtilityAccount\Desktop\files\core.bat" </Command>
+  </LogonCommand>
+</Configuration>
