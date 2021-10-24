@@ -1,29 +1,54 @@
 @echo off
-SET RootDir=C:\proxycap
-SET LookForFile=%RootDir%\files\Registration.reg
-goto check_Permissions
+SET RootDir=%~dp0
+SET LookForRegKey=%RootDir%files\Registration.reg
+SET LookForExe=%RootDir%files\pcap536_x64.msi
+SET InstallDir=C:\"Program Files"\"Proxy Labs"\ProxyCap
+SET WindowsSBdir=%systemroot%\system32\WindowsSandbox.exe
+
+setlocal
+for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
+if "%version%" GEQ  "10.0" (goto CheckForVM) else (goto versionCheck)
+endlocal
+
+:versionCheck
+echo You need Windows 10 or greater...
+TIMEOUT /T 5 >nul
+exit
+
+:CheckForVM
+IF EXIST %WindowsSBdir% GOTO check_Permissions
+echo You need to have the Windows 10 Sandbox option enabled/installed...
+TIMEOUT /T 5 >nul
+
 :check_Permissions
     net session >nul 2>&1
     if %errorLevel% == 0 (
-        goto START
+        goto :DownloadEXE
     ) else (
 		echo Please run as administrator for the registry key to be updated automatically...
 		TIMEOUT /T 5 >nul
-		goto START
+		goto :DownloadEXE
     )
 	
+:DownloadEXE
+IF EXIST %LookForExe% GOTO START
+echo Downloading pcap536_x64.msi ...
+powershell Invoke-WebRequest -Uri "https://www.proxycap.com/download/pcap536_x64.msi" -OutFile "%RootDir%files\pcap536_x64.msi"
+
 :START
+cls
+echo [DONE] Downloading pcap536_x64.msi ...
 echo Terminating pcapui.exe...
 taskkill /F /IM "pcapui.exe" >nul
 cls
 echo [Done] Terminating pcapui.exe...
 echo Deleting previous extracted key...
-del %LookForFile% >nul
+del %LookForRegKey% >nul
 cls	
 echo [DONE] Terminating pcapui.exe...
 echo [Done] Deleting previous extracted key...
 echo Starting Windows Sandbox...
-start %systemroot%\system32\WindowsSandbox.exe %RootDir%\files\sandbox.wsb
+start %WindowsSBdir% %RootDir%\files\sandbox.wsb
 cls
 echo [DONE] Terminating pcapui.exe...
 echo [DONE] Starting Windows Sandbox...
@@ -34,7 +59,7 @@ echo [DONE] Starting Windows Sandbox...
 echo Waiting for the new registry key to be extracted...
 
 :CheckForFile
-IF EXIST %LookForFile% GOTO FoundIt
+IF EXIST %LookForRegKey% GOTO FoundIt
 TIMEOUT /T 2 >nul
 GOTO CheckForFile
 
@@ -60,7 +85,7 @@ echo [DONE] Starting Windows Sandbox...
 echo [DONE] Waiting for the new registry key to be extracted...
 echo [DONE] Terminating Windows Sandbox...
 echo Importing the new registry key...
-reg import %LookForFile%
+reg import %LookForRegKey%
 TIMEOUT /T 3 >nul
 cls
 echo [DONE] Terminating pcapui.exe...
@@ -69,7 +94,7 @@ echo [DONE] Waiting for the new registry key to be extracted...
 echo [DONE] Terminating Windows Sandbox...
 echo [DONE] Importing the new registry key...
 echo Starting pcapui.exe
-start C:\Program Files\Proxy Labs\ProxyCap\pcapui.exe
+START %InstallDir%\pcapui.exe
 cls
 echo [DONE] Terminating pcapui.exe...
 echo [DONE] Starting Windows Sandbox...
