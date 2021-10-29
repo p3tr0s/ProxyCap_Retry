@@ -16,9 +16,24 @@ TIMEOUT /T 5 >nul
 exit
 
 :CheckForVM
-IF EXIST %WindowsSBdir% GOTO check_Permissions
+IF EXIST %WindowsSBdir% GOTO CheckForWSBfile
 echo You need to have the Windows 10 Sandbox option enabled/installed...
 TIMEOUT /T 5 >nul
+
+:CheckForWSBfile
+echo ^<Configuration^>>%RootDir%\files\sandbox.wsb
+echo  ^<Networking^>Disabled^</Networking^>>>%RootDir%\files\sandbox.wsb
+echo  ^<MappedFolders^>>>%RootDir%\files\sandbox.wsb
+echo    ^<MappedFolder^>>>%RootDir%\files\sandbox.wsb
+echo      ^<HostFolder^>%RootDir%files^</HostFolder^>>>%RootDir%\files\sandbox.wsb
+echo      ^<ReadOnly^>false^</ReadOnly^>>>%RootDir%\files\sandbox.wsb
+echo    ^</MappedFolder^>>>%RootDir%\files\sandbox.wsb
+echo  ^</MappedFolders^>>>%RootDir%\files\sandbox.wsb
+echo  ^<LogonCommand^>>>%RootDir%\files\sandbox.wsb
+echo    ^<Command^>powershell -command "while (!(Test-PathC:\\Users\\WDAGUtilityAccount\\Desktop\\files\\core.bat)) { Start-Sleep 1 } Start-Process C:\\Users\\WDAGUtilityAccount\\Desktop\\files\\core.bat" ^</Command^>>>%RootDir%\files\sandbox.wsb
+echo  ^</LogonCommand^>>>%RootDir%\files\sandbox.wsb
+echo ^</Configuration^>>>%RootDir%\files\sandbox.wsb
+
 
 :check_Permissions
     net session >nul 2>&1
