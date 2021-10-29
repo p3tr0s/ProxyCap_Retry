@@ -9,7 +9,7 @@ It utilizes the Windows 10 Sandbox to extract a fresh 30 day trial key.
 Requirements:
 <li>Have Windows 10 (x64) and the Sandbox enabled
 <li>The root folder - "proxycap" - of the script needs to be placed in C:\ so the path looks like C:\proxycap\START.bat
-<li>OTHERWISE you need to modify the var %RootDir% in START.bat and ./files/sandbox.wsb
+<li>OTHERWISE you need to modify the path in ./files/sandbox.wsb
 <li>The START.bat script will try to download pcap536_x64.msi from the <a href="https://www.proxycap.com/">official site</a> in the ./files/ dir if it's not already there
 <li>If the version changes you need to modify the vars in START.bat and ./files/sandbox.wsb
 
