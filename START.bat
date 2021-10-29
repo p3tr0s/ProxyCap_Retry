@@ -1,9 +1,13 @@
 @echo off
 SET RootDir=%~dp0
+SET ExeName=pcap536_x64.msi
 SET LookForRegKey=%RootDir%files\Registration.reg
-SET LookForExe=%RootDir%files\pcap536_x64.msi
+SET LookForExe=%RootDir%files\%ExeName%
 SET InstallDir=C:\"Program Files"\"Proxy Labs"\ProxyCap
 SET WindowsSBdir=%systemroot%\system32\WindowsSandbox.exe
+
+
+if not exist %RootDir%files\ mkdir %RootDir%files\
 
 setlocal
 for /f "tokens=4-5 delims=. " %%i in ('ver') do set VERSION=%%i.%%j
@@ -21,6 +25,7 @@ echo You need to have the Windows 10 Sandbox option enabled/installed...
 TIMEOUT /T 5 >nul
 
 :CheckForWSBfile
+IF EXIST %RootDir%\files\sandbox.wsb GOTO CheckForCore
 echo ^<Configuration^>>%RootDir%\files\sandbox.wsb
 echo  ^<Networking^>Disabled^</Networking^>>>%RootDir%\files\sandbox.wsb
 echo  ^<MappedFolders^>>>%RootDir%\files\sandbox.wsb
@@ -33,6 +38,19 @@ echo  ^<LogonCommand^>>>%RootDir%\files\sandbox.wsb
 echo    ^<Command^>powershell -command "while (!(Test-PathC:\\Users\\WDAGUtilityAccount\\Desktop\\files\\core.bat)) { Start-Sleep 1 } Start-Process C:\\Users\\WDAGUtilityAccount\\Desktop\\files\\core.bat" ^</Command^>>>%RootDir%\files\sandbox.wsb
 echo  ^</LogonCommand^>>>%RootDir%\files\sandbox.wsb
 echo ^</Configuration^>>>%RootDir%\files\sandbox.wsb
+
+:CheckForCore
+IF EXIST %RootDir%\files\core.bat GOTO check_Permissions
+echo ^@echo off>%RootDir%files\core.bat
+echo set proxycap_file=C:/Users/WDAGUtilityAccount/Desktop/files/%ExeName%>>%RootDir%files\core.bat
+echo echo Extracting Proxycap registration key...>>%RootDir%files\core.bat
+echo echo please wait ...>>%RootDir%files\core.bat
+echo "%%proxycap_file%%" /qn /norestart>>%RootDir%files\core.bat
+echo rem get Registration Key for x64>>%RootDir%files\core.bat
+echo "reg" "export" "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Proxy Labs\ProxyCap\Registration" "C:/Users/WDAGUtilityAccount/Desktop/files/Registration.reg" /Y>>%RootDir%files\core.bat
+echo echo [DONE] Extracting Proxycap registration key...>>%RootDir%files\core.bat
+echo echo Sandbox closing...>>%RootDir%files\core.bat
+echo TIMEOUT /T 10 ^>nul>>%RootDir%files\core.bat
 
 
 :check_Permissions
@@ -47,12 +65,12 @@ echo ^</Configuration^>>>%RootDir%\files\sandbox.wsb
 	
 :DownloadEXE
 IF EXIST %LookForExe% GOTO START
-echo Downloading pcap536_x64.msi ...
-powershell Invoke-WebRequest -Uri "https://www.proxycap.com/download/pcap536_x64.msi" -OutFile "%RootDir%files\pcap536_x64.msi"
+echo Downloading %ExeName% ...
+powershell Invoke-WebRequest -Uri "https://www.proxycap.com/download/%ExeName%" -OutFile "%RootDir%files\%ExeName%"
 
 :START
 cls
-echo [DONE] Downloading pcap536_x64.msi ...
+echo [DONE] Downloading %ExeName% ...
 echo Terminating pcapui.exe...
 taskkill /F /IM "pcapui.exe" >nul
 cls
@@ -67,11 +85,12 @@ start %WindowsSBdir% %RootDir%\files\sandbox.wsb
 cls
 echo [DONE] Terminating pcapui.exe...
 echo [DONE] Starting Windows Sandbox...
-TIMEOUT /T 15 >nul
+TIMEOUT /T 10 >nul
 cls
 echo [DONE] Terminating pcapui.exe...
 echo [DONE] Starting Windows Sandbox...
 echo Waiting for the new registry key to be extracted...
+GOTO CheckForFile
 
 :CheckForFile
 IF EXIST %LookForRegKey% GOTO FoundIt
