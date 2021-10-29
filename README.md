@@ -13,6 +13,6 @@ Requirements:
 
 <li>If you run START.bat as administrator the registry key will be imported automatically otherwise use regedit to import the ./files/Registration.reg
 
-<li>If the installation of ProxyCap is not in "C:\Program Files\Proxy Labs\ProxyCap" you should run the application after the script is done. However, it should be better to restart your PC after you are done.
+<li>If the installation of ProxyCap is not in "C:\Program Files\Proxy Labs\ProxyCap" you should either change the InstallDir variable in START.bat or you should run the application again after the script is done. However, it should be better to restart your PC after the script completes.
   
 You could add the START.bat to a recurring (every ~25 days) scheduled task in Windows, with some conditions, for maximum carelessness(?)
