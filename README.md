@@ -7,7 +7,7 @@ A very badly written batch script to reset the 30 day trial of Proxycap. <br>
 It utilizes the Windows 10 Sandbox to extract a fresh 30 day trial key.
 
 Requirements:
-<li>Have Windows 10 (x64) and the Sandbox enabled
+<li>Have Windows 10 (x64) and the Sandbox enabled (<a href="https://letmegooglethat.com/?q=how+to+enable+sandbox+in+windows+10">How To...</a>)
 <li>The START.bat script will try to download pcap536_x64.msi from the <a href="https://www.proxycap.com/">official site</a> in the ./files/ dir if it's not already there
 <li>If the version changes you need to modify the vars in START.bat and ./files/sandbox.wsb
 
