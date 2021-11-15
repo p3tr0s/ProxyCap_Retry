@@ -33,7 +33,8 @@ endlocal
 	IF EXIST %WindowsSBdir% GOTO CheckForWSBfile
 	echo You need to have the Windows 10 Sandbox option enabled/installed...
 	TIMEOUT /T 5 >nul
-
+	exit
+	
 :CheckForWSBfile
 	IF EXIST %RootDir%\files\sandbox.wsb GOTO CheckForCore
 	echo ^<Configuration^>>%RootDir%\files\sandbox.wsb
@@ -133,7 +134,7 @@ endlocal
         reg import %LookForRegKey%
 		TIMEOUT /T 2 >nul
     ) else (
-		echo [CAUTION] Remember to import the Registration.reg to your registry OR run the script as administrator... [CAUTION]
+		echo [CAUTION] Remember to import the Registration.reg to your registry OR run this script as administrator... [CAUTION]
 		TIMEOUT /T 5 >nul
     )
 	cls
@@ -167,3 +168,4 @@ endlocal
 :Closethis
 	echo Exiting...
 	TIMEOUT /T 5 >nul
+	exit
