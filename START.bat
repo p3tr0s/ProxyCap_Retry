@@ -1,6 +1,6 @@
 @echo off
 SET RootDir=%~dp0
-SET ExeName=pcap536_x64.msi
+SET ExeName=pcap537_x64.msi
 SET LookForRegKey=%RootDir%files\Registration.reg
 SET LookForExe=%RootDir%files\%ExeName%
 SET InstallDir=C:\"Program Files"\"Proxy Labs"\ProxyCap
