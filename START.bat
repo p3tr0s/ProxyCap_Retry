@@ -149,7 +149,7 @@ endlocal
 		echo [CAUTION] Remember to import the Registration.reg to your registry OR run the script as administrator... [CAUTION]
     )
 	echo Starting pcapui.exe
-	START %InstallDir%
+	START "" %InstallDir%
 	
 	cls
 	echo [DONE] Terminating pcapui.exe...
