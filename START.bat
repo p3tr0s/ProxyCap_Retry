@@ -3,7 +3,7 @@ SET RootDir=%~dp0
 SET ExeName=pcap536_x64.msi
 SET LookForRegKey=%RootDir%files\Registration.reg
 SET LookForExe=%RootDir%files\%ExeName%
-SET InstallDir=C:\"Program Files"\"Proxy Labs"\ProxyCap
+FOR /F "skip=2 tokens=2,*" %%A IN ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ProxyCap"') DO set "InstallDir=%%B"
 SET WindowsSBdir=%systemroot%\system32\WindowsSandbox.exe
 
 if not exist %RootDir%files\ mkdir %RootDir%files\
@@ -149,7 +149,7 @@ endlocal
 		echo [CAUTION] Remember to import the Registration.reg to your registry OR run the script as administrator... [CAUTION]
     )
 	echo Starting pcapui.exe
-	START %InstallDir%\pcapui.exe
+	START %InstallDir%
 	
 	cls
 	echo [DONE] Terminating pcapui.exe...
