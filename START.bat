@@ -3,6 +3,7 @@ SET RootDir=%~dp0
 SET ExeName=pcap536_x64.msi
 SET LookForRegKey=%RootDir%files\Registration.reg
 SET LookForExe=%RootDir%files\%ExeName%
+REM Get installation dir from registry
 FOR /F "skip=2 tokens=2,*" %%A IN ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ProxyCap"') DO set "InstallDir=%%B"
 SET WindowsSBdir=%systemroot%\system32\WindowsSandbox.exe
 
