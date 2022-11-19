@@ -1,5 +1,5 @@
 @echo off
-SET RootDir=%~dp0
+SET RootDir="%~dp0"
 SET ExeName=pcap536_x64.msi
 SET LookForRegKey=%RootDir%files\Registration.reg
 SET LookForExe=%RootDir%files\%ExeName%
@@ -42,7 +42,7 @@ endlocal
 	echo  ^<Networking^>Disabled^</Networking^>>>%RootDir%\files\sandbox.wsb
 	echo  ^<MappedFolders^>>>%RootDir%\files\sandbox.wsb
 	echo    ^<MappedFolder^>>>%RootDir%\files\sandbox.wsb
-	echo      ^<HostFolder^>%RootDir%files^</HostFolder^>>>%RootDir%\files\sandbox.wsb
+	echo      ^<HostFolder^>%~dp0files^</HostFolder^>>>%RootDir%\files\sandbox.wsb
 	echo      ^<ReadOnly^>false^</ReadOnly^>>>%RootDir%\files\sandbox.wsb
 	echo    ^</MappedFolder^>>>%RootDir%\files\sandbox.wsb
 	echo  ^</MappedFolders^>>>%RootDir%\files\sandbox.wsb
@@ -93,7 +93,7 @@ endlocal
 	echo [DONE] Terminating pcapui.exe...
 	echo [Done] Deleting previous extracted key...
 	echo Starting Windows Sandbox...
-	start %WindowsSBdir% %RootDir%\files\sandbox.wsb
+	start %WindowsSBdir% "%~dp0files\sandbox.wsb"
 	cls
 	echo [DONE] Terminating pcapui.exe...
 	echo [DONE] Starting Windows Sandbox...
