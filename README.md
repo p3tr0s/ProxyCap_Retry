@@ -1,3 +1,6 @@
+<img title="proxycap" src="https://img.shields.io/badge/Requires-ProxyCap-yellow">
+<img title="Version" src="https://img.shields.io/badge/For Version-5.3.6-yellow">
+
 # Retry Proxycap
 
 Inspired by <a href="https://github.com/lianshufeng/proxycap_crack">lianshufeng/proxycap_crack</a>
