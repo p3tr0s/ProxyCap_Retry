@@ -1,5 +1,5 @@
 @echo off
-SET RootDir="%~dp0
+SET RootDir=%~dp0
 SET ExeName=pcap538_x64.msi
 SET LookForRegKey1=%RootDir%files\Registration1.reg
 SET LookForRegKey2=%RootDir%files\Registration2.reg
