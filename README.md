@@ -22,6 +22,7 @@ Requirements (for v536):
  
 
 Requirements (for v538):
+<li>Edit the script [line:50] and add a url with your .prs config file for persistance between software reloads
 <li>Run as administrator in order to delete old registry keys.
 <li>The START.bat script will try to download `pcap53*_x64.msi` from the `<a href="https://www.proxycap.com/">official site</a>` in the `./files/` dir if it's not already there.
 <li>If the version changes you need to modify the var with the name of the .exe in the script.
