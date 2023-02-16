@@ -4,8 +4,6 @@ SET ExeName=pcap538_x64.msi
 SET LookForExe=%RootDir%files\%ExeName%
 REM Get installation dir from registry
 FOR /F "skip=2 tokens=2,*" %%A IN ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ProxyCap"') DO set "InstallDir=%%B"
-SET WindowsSBdir=%systemroot%\system32\WindowsSandbox.exe
-SET BackupURL=""
 
 if not exist %RootDir%files\ mkdir %RootDir%files\
 
@@ -49,8 +47,7 @@ if %OS%==64BIT GOTO Arc_x64
 	echo [DONE] Deleting old registry keys...
 	echo [DONE] Terminating pcapui.exe...
 	echo "Repairing" ProxyCap...
-	IF "%BackupURL%"=="" set /P BackupURL=Enter the url to retrieve your settings backup: 
-	cmd /c %LookForExe% /qn /norestart PROXYCAPRULESETURL="%BackupURL%"
+	cmd /c %LookForExe% /qn /norestart rem PROXYCAPRULESETURL="http://localhost/proxycap_backup_settings.prs" rem Add a url with your settings backup for persistance
 	cls
 	echo [Done] Repairing ProxyCap...
 	TIMEOUT /T 1 >nul
