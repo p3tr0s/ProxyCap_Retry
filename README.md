@@ -16,7 +16,7 @@ Requirements (for v538):
 <li>Run as administrator in order to delete old registry keys.
 <li>The START.bat script will try to download `pcap53*_x64.msi` from the `<a href="https://www.proxycap.com/">official site</a>` in the `./files/` dir if it's not already there.
 <li>If the version changes you need to modify the var with the name of the .exe in the script.
-<li>It will silenty reinstall ProxyCap (no prompts or restart)
+<li>It will silently reinstall ProxyCap (no prompts or restart)
 <li>It will finish by running the "refreshed" proxycap.
 
 You could add the START_53*.bat to a recurring (every ~25 days) scheduled task in Windows, with some conditions, for maximum carelessness(?)
