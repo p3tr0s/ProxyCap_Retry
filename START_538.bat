@@ -1,7 +1,10 @@
 @echo off
+@rem
 SET RootDir=%~dp0
 SET ExeName=pcap538_x64.msi
 SET LookForExe=%RootDir%files\%ExeName%
+rem Replace localhost with a url with your settings backup for persistance
+rem SET PersistantSettingsCmd=PROXYCAPRULESETURL^="http://localhost/proxycap_backup_settings.prs"
 REM Get installation dir from registry
 FOR /F "skip=2 tokens=2,*" %%A IN ('reg.exe query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ProxyCap"') DO set "InstallDir=%%B"
 
@@ -47,7 +50,11 @@ if %OS%==64BIT GOTO Arc_x64
 	echo [DONE] Deleting old registry keys...
 	echo [DONE] Terminating pcapui.exe...
 	echo "Repairing" ProxyCap...
-	cmd /c %LookForExe% /qn /norestart rem PROXYCAPRULESETURL="http://localhost/proxycap_backup_settings.prs" rem Add a url with your settings backup for persistance
+	IF [%PersistantSettingsCmd%] == [] GOTO NOSETTINGS
+:SETTINGS
+	start msiexec.exe /i %LookForExe% /qn /norestart %PersistantSettingsCmd% 
+:NOSETTINGS
+	start msiexec.exe /i %LookForExe% /qn /norestart
 	cls
 	echo [Done] Repairing ProxyCap...
 	TIMEOUT /T 1 >nul
