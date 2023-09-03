@@ -12,7 +12,7 @@ if not exist %SettingsBackupDir% mkdir %SettingsBackupDir%
 copy %ProgramData%\ProxyCap\machine.prs "%RootDir%settingsBackup\%BackupFile%"
 SET BackupFile="%RootDir%settingsBackup\%BackupFile%"
 rem Start WebServer for settings persistance
-start /D %RootDir%settingsBackup\ %RootDir%settingsBackup\simpleWebServer.exe.exe
+start /D %RootDir%settingsBackup\ %RootDir%files\simpleWebServer.exe
 SET settingsUrl="http://localhost:8080/%BackupFile%"
 
 if not exist %RootDir%files\ mkdir %RootDir%files\
@@ -73,6 +73,7 @@ if %OS%==64BIT GOTO Arc_x64
 
 :Closethis
 	cls
+	taskkill /f /im simpleWebServer.exe
 	echo We are done (probably)...
 	echo Exiting...
 	TIMEOUT /T 5 >nul
