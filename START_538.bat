@@ -73,9 +73,9 @@ if %OS%==64BIT GOTO Arc_x64
 	GOTO Closethis
 
 :Closethis
+	taskkill /f /im simpleWebServer.exe
 	cls
 	echo We are done (probably)...
-	taskkill /f /im simpleWebServer.exe
 	echo Exiting...
 	TIMEOUT /T 5 >nul
 	exit
