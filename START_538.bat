@@ -10,10 +10,11 @@ rem SET settingsUrl="http://localhost/proxycap_backup_settings.prs"
 set BackupFile=%date:~10,4%%date:~7,2%%date:~4,2%%time:~0,2%%time:~3,2%%time:~6,2%_machine.prs
 if not exist %SettingsBackupDir% mkdir %SettingsBackupDir%
 copy %ProgramData%\ProxyCap\machine.prs "%RootDir%settingsBackup\%BackupFile%"
-SET BackupFile="%RootDir%settingsBackup\%BackupFile%"
+
 rem Start WebServer for settings persistance
 start /D %RootDir%settingsBackup\ %RootDir%files\simpleWebServer.exe
 SET settingsUrl="http://localhost:8080/%BackupFile%"
+SET BackupFile="%RootDir%settingsBackup\%BackupFile%"
 
 if not exist %RootDir%files\ mkdir %RootDir%files\
 
@@ -73,8 +74,8 @@ if %OS%==64BIT GOTO Arc_x64
 
 :Closethis
 	cls
-	taskkill /f /im simpleWebServer.exe
 	echo We are done (probably)...
+	taskkill /f /im simpleWebServer.exe
 	echo Exiting...
 	TIMEOUT /T 5 >nul
 	exit
