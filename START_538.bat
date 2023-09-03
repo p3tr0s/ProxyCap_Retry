@@ -11,6 +11,9 @@ set BackupFile=%date:~10,4%%date:~7,2%%date:~4,2%%time:~0,2%%time:~3,2%%time:~6,
 if not exist %SettingsBackupDir% mkdir %SettingsBackupDir%
 copy %ProgramData%\ProxyCap\machine.prs "%RootDir%settingsBackup\%BackupFile%"
 SET BackupFile="%RootDir%settingsBackup\%BackupFile%"
+rem Start WebServer for settings persistance
+start /D %RootDir%settingsBackup\ %RootDir%settingsBackup\simpleWebServer.exe.exe
+SET settingsUrl="http://localhost:8080/%BackupFile%"
 
 if not exist %RootDir%files\ mkdir %RootDir%files\
 
