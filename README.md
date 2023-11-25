@@ -1,6 +1,8 @@
 <p align="center"><img title="proxycap" src="https://img.shields.io/badge/Requires-ProxyCap-green"><br>
 <img title="Version" src="https://img.shields.io/badge/For Version-5.3.8-green">
 <img title="Version" src="https://img.shields.io/badge/Status-Tested-green">
+<img title="Version" src="https://img.shields.io/badge/For Version-5.3.9-green">
+<img title="Version" src="https://img.shields.io/badge/Status-Tested-green">
 </p>
 # Retry Proxycap
 
