@@ -20,5 +20,5 @@ Requirements (for v538/v539):
 
 You could add the START_53*.bat to a recurring (every ~25 days) scheduled task in Windows, with some conditions, for maximum carelessness(?)
 
-## Donation/Support/Appreciation
+## Donation / Support / Appreciation
 <a href="https://www.buymeacoffee.com/p3tr0s"><img src="https://static.vecteezy.com/system/resources/previews/025/222/157/original/shawarma-sandwich-isolated-on-transparent-background-png.png"></a>
