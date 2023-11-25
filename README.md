@@ -10,7 +10,7 @@ Inspired by <a href="https://github.com/lianshufeng/proxycap_crack">lianshufeng/
 
 A very badly written batch script to reset the 30 day trial of Proxycap. <br>
 
-Requirements (for v538):
+Requirements (for v538/v539):
 <li>Edit the script [line:9] remove "rem" and change localhost to a url with your .prs config file for persistance between software reloads  - - currently if you have the simple web server exe in your files folder it will try to load your latest config through it - - 
 <li>Run as administrator in order to delete old registry keys.
 <li>The START.bat script will try to download `pcap53*_x64.msi` from the `<a href="https://www.proxycap.com/">official site</a>` in the `./files/` dir if it's not already there.
